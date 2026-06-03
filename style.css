@@ -639,13 +639,12 @@ body {
     }
 }
 
-/* --- WORKS SECTION --- */
+/* --- WORKS SECTION (SCROLLING CAROUSEL) --- */
 .works-section {
-    padding: 6rem 5%;
-    max-width: 1400px;
-    margin: 0 auto;
+    padding: 6rem 0; /* No side padding so it stretches full width */
     position: relative;
     z-index: 2;
+    overflow: hidden;
 }
 
 .works-header {
@@ -654,6 +653,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 5%;
 }
 
 .works-subtitle {
@@ -664,113 +664,186 @@ body {
     max-width: 600px;
 }
 
-.works-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.work-card {
-    padding: 1rem;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.02);
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.work-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-8px);
-    border-color: rgba(216, 180, 254, 0.3);
-    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.4);
-}
-
-.work-media {
-    width: 100%;
-    aspect-ratio: 4/5;
-    border-radius: 16px;
+.carousel-container {
+    width: 100vw;
     overflow: hidden;
     position: relative;
-    background: #000;
+    display: flex;
 }
 
-.work-media video {
+/* Fades the edges of the screen so the videos gently appear/disappear */
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+.carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, #08080c, transparent);
+}
+.carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, #08080c, transparent);
+}
+
+.carousel-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    will-change: transform;
+}
+
+/* Pauses the scrolling animation when a user hovers anywhere on the track */
+.carousel-container:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+/* Two different animations for opposite directions */
+.track-left {
+    animation: scrollLeft 35s linear infinite;
+}
+.track-right {
+    /* Starts halfway shifted so it doesn't look identical to the top row */
+    animation: scrollRight 40s linear infinite reverse; 
+}
+
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Moves left exactly half its width (1 set of cards) */
+}
+@keyframes scrollRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Individual Portfolio Cards */
+.carousel-card {
+    width: 280px; /* Mobile-first vertical ratio */
+    height: 480px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-shrink: 0;
+}
+
+.carousel-card video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
-    opacity: 0.8;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
 }
 
-.work-card:hover .work-media video {
+.carousel-card:hover {
     transform: scale(1.05);
-    opacity: 1;
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+    border-color: rgba(168, 85, 247, 0.6);
+    z-index: 10;
 }
 
-.play-overlay {
+.carousel-card:hover video {
+    opacity: 1; /* Lights up the video when hovered */
+}
+
+/* Gradient overlay at the bottom of the card for text readability */
+.card-info {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(168, 85, 247, 0.4); /* Purple tint */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-.work-card:hover .play-overlay {
-    opacity: 1;
-}
-
-.play-overlay svg {
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
-    transform: scale(0.8);
+    padding: 4rem 1.5rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    pointer-events: none; /* Allows hovering the video directly */
+    transform: translateY(10px);
     transition: transform 0.3s ease;
 }
 
-.work-card:hover .play-overlay svg {
-    transform: scale(1);
+.carousel-card:hover .card-info {
+    transform: translateY(0);
 }
 
-.work-info {
-    padding: 1.5rem 0.5rem 0.5rem 0.5rem;
-}
-
-.work-category {
+.card-category {
     font-size: 0.75rem;
     color: #d8b4fe;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
 }
 
-.work-title {
-    font-size: 1.25rem;
+.card-title {
+    font-size: 1.2rem;
     font-weight: 800;
-    color: #f3f3f3;
-    margin-top: 0.5rem;
+    color: #fff;
+    margin-top: 0.3rem;
 }
 
-.works-action {
-    margin-top: 4rem;
-    text-align: center;
+/* --- POP-UP MODAL STYLES --- */
+.modal {
+    display: none; /* Hidden by default, JS controls this */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    background: rgba(8, 8, 12, 0.95); /* Deep dark backdrop */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    justify-content: center;
+    align-items: center;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-    .works-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.modal-content {
+    width: 90%;
+    max-width: 450px; /* Constrains it for a nice vertical mobile-style video playback */
+    border-radius: 24px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-content video {
+    width: 100%;
+    border-radius: 16px;
+    background: #000;
+    max-height: 85vh; /* Prevents extremely tall videos from breaking the screen */
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: -50px;
+    font-size: 2.5rem;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+@keyframes modalPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @media (max-width: 768px) {
-    .works-grid {
-        grid-template-columns: 1fr;
+    .close-btn {
+        right: 15px;
+        top: 15px;
+        z-index: 10;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 }
