@@ -234,71 +234,66 @@
         </div>
     </div>
 
-    <!-- NEW: Master Script managing Array, Filtering, Tracks, and Hover Logic -->
+    <!-- NEW: Master Script managing the 56 Array, Filtering, Tracks, and Hover Logic -->
     <script>
-        // 1. THE 56-ITEM PORTFOLIO DATABASE
-        // Change the 'src' link inside quotes for each item when uploading your real videos.
+        // 1. THE EXACT 56-ITEM PORTFOLIO DATABASE BASED ON YOUR SCREENSHOT
         const allPortfolioData = [
-            // Batch 1 (14 items based on your list)
-            { filter: "Health", category: "Health & Wellness", title: "Gut Health", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Education", title: "Kids Encyclopedia Book", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Gut Supplement for Dogs", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Blood Pressure Remedy", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Silversticks for Cats", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            // Batch 2 (Repeating to reach 56 total)
-            { filter: "Health", category: "Health & Wellness", title: "Gut Health 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Education", title: "Kids Encyclopedia 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Health Supplement 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Dog Gut Supplement 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Blood Pressure Remedy 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Cat Silversticks 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV 2", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            // Batch 3
-            { filter: "Health", category: "Health & Wellness", title: "Gut Health 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Education", title: "Kids Encyclopedia 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Supplement 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Dog Gut Supplement 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Blood Pressure Remedy 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Cat Silversticks 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV 3", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            // Batch 4
-            { filter: "Health", category: "Health & Wellness", title: "Gut Health 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Education", title: "Kids Encyclopedia 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Supplement 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Dog Gut Supplement 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Blood Pressure Remedy 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Cat Silversticks 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV 4", src: "https://wanderbites.alwaysdata.net/showreel.mp4" }
+            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place", src: "https://wanderbites.alwaysdata.net/bar.mp4" },
+            { filter: "Products", category: "Education", title: "Kids Encyclopedia Book", src: "https://wanderbites.alwaysdata.net/book.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp1.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp2.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp3.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp4.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp5.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp6.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp7.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp8.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp9.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv1.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv2.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv3.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish1.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish2.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish3.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish4.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish5.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish6.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish7.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish8.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish9.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish10.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish11.mp4" },
+            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish12.mp4" },
+            { filter: "Pets", category: "Pet Health", title: "Gut Supplement for Dogs", src: "https://wanderbites.alwaysdata.net/dog.mp4" },
+            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine", src: "https://wanderbites.alwaysdata.net/elder.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk1.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk2.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Gut Health", src: "https://wanderbites.alwaysdata.net/guts1.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid1.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid2.mp4" },
+            { filter: "Pets", category: "Pet Products", title: "Silversticks for Cats", src: "https://wanderbites.alwaysdata.net/showreel.mp4" }, 
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool1.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool2.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool3.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool4.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool5.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool6.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool7.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool8.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest1.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest2.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest3.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest4.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl1.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl2.mp4" }
         ];
 
         // 2. DYNAMIC RENDERING LOGIC
@@ -340,11 +335,11 @@
                     return;
                 }
 
-                // Generate HTML for the exact items, then double it for the infinite loop
+                // Generate HTML for the exact items, then double it for the infinite loop math
                 let cardsHTML = items.map(createCardHTML).join('');
                 track.innerHTML = cardsHTML + cardsHTML;
 
-                // Create the exact number of tracking dots
+                // Create the exact number of tracking dots for the items present
                 dotsContainer.innerHTML = items.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('');
 
                 // Apply Hover listeners to newly created elements
