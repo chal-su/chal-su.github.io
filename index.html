@@ -182,63 +182,195 @@
         </div>
     </section>
 
-    <!-- Works Section -->
+    <!-- Works Section (Continuous Carousel) -->
     <section id="works" class="works-section">
         <div class="works-header">
             <div class="badge glass">
                 — PORTFOLIO
             </div>
-            <h2 class="section-title">Selected <span class="text-gradient">Works</span></h2>
-            <p class="works-subtitle">A showcase of high-retention edits, viral shorts, and brand campaigns.</p>
+            <h2 class="section-title">Work That <br><span class="text-gradient">Moves People</span></h2>
+            <p class="works-subtitle">A selection of projects across paid ads, content creation, and brand campaigns.</p>
         </div>
 
-        <div class="works-grid">
-            <!-- Work Card 1 -->
-            <div class="work-card glass">
-                <div class="work-media">
-                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-                    <div class="play-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        <!-- First Row: Scrolls Left -->
+        <div class="carousel-container">
+            <div class="carousel-track track-left">
+                <!-- We duplicate the cards inside the track so it loops seamlessly -->
+                <!-- Card Set 1 -->
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Short-Form</span>
+                        <h3 class="card-title">TikTok Hook</h3>
                     </div>
                 </div>
-                <div class="work-info">
-                    <span class="work-category">Short-Form Ads</span>
-                    <h3 class="work-title">Direct Response Campaign</h3>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Commercial</span>
+                        <h3 class="card-title">Fitness Promo</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">B-Roll</span>
+                        <h3 class="card-title">Cinematic Sequence</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">UGC Ad</span>
+                        <h3 class="card-title">Direct Response</h3>
+                    </div>
+                </div>
+                <!-- Card Set 2 (Exact Duplicate for Seamless Loop) -->
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Short-Form</span>
+                        <h3 class="card-title">TikTok Hook</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Commercial</span>
+                        <h3 class="card-title">Fitness Promo</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">B-Roll</span>
+                        <h3 class="card-title">Cinematic Sequence</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">UGC Ad</span>
+                        <h3 class="card-title">Direct Response</h3>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Work Card 2 -->
-            <div class="work-card glass">
-                <div class="work-media">
-                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-                    <div class="play-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        <!-- Second Row: Scrolls Right -->
+        <div class="carousel-container" style="margin-top: 2rem;">
+            <div class="carousel-track track-right">
+                <!-- Card Set 1 -->
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Long-Form</span>
+                        <h3 class="card-title">YouTube Documentary</h3>
                     </div>
                 </div>
-                <div class="work-info">
-                    <span class="work-category">Brand Documentary</span>
-                    <h3 class="work-title">Cinematic Storytelling</h3>
-                </div>
-            </div>
-
-            <!-- Work Card 3 -->
-            <div class="work-card glass">
-                <div class="work-media">
-                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-                    <div class="play-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Motion Graphics</span>
+                        <h3 class="card-title">Title Sequences</h3>
                     </div>
                 </div>
-                <div class="work-info">
-                    <span class="work-category">Social Media</span>
-                    <h3 class="work-title">Viral TikTok Edits</h3>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Social Media</span>
+                        <h3 class="card-title">Instagram Reels</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Campaign</span>
+                        <h3 class="card-title">Brand Awareness</h3>
+                    </div>
+                </div>
+                <!-- Card Set 2 (Exact Duplicate for Seamless Loop) -->
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Long-Form</span>
+                        <h3 class="card-title">YouTube Documentary</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Motion Graphics</span>
+                        <h3 class="card-title">Title Sequences</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Social Media</span>
+                        <h3 class="card-title">Instagram Reels</h3>
+                    </div>
+                </div>
+                <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
+                    <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
+                    <div class="card-info">
+                        <span class="card-category">Campaign</span>
+                        <h3 class="card-title">Brand Awareness</h3>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="works-action">
-            <a href="#contact" class="btn btn-outline">See More on YouTube →</a>
-        </div>
+        <p style="text-align: center; color: #a1a1aa; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 3rem;">
+            Hover to play • Click to view full screen
+        </p>
     </section>
+
+    <!-- Pop-Up Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <video id="modalVideo" controls autoplay playsinline></video>
+        </div>
+    </div>
+
+    <!-- Script for Hover & Modal Interactivity -->
+    <script>
+        // 1. Play video on hover
+        const cards = document.querySelectorAll('.carousel-card');
+        cards.forEach(card => {
+            const video = card.querySelector('video');
+            card.addEventListener('mouseenter', () => {
+                video.play();
+            });
+            card.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0; // Resets the video to the start
+            });
+        });
+
+        // 2. Modal Popup Logic
+        const modal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        function openModal(videoSrc) {
+            modal.style.display = 'flex';
+            modalVideo.src = videoSrc;
+            modalVideo.play();
+        }
+        
+        function closeModal() {
+            modal.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.src = '';
+        }
+
+        // Close modal when clicking anywhere outside the video
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
