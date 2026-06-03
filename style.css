@@ -317,3 +317,75 @@ body {
         transform: translateY(0px);
     }
 }
+
+/* Floating Background Icons */
+.bg-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Keeps them strictly behind everything else */
+    pointer-events: none; /* Prevents them from interfering with clicking */
+}
+
+.icon-box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    opacity: 0.6; /* Makes them subtle */
+    filter: blur(1px); /* Pushes them slightly out of focus into the background */
+    animation: float 6s ease-in-out infinite; 
+}
+
+/* Specific Icon Styling and Positioning */
+.icon-pr {
+    background: linear-gradient(135deg, #2a0a4a, #4a1580);
+    top: 10%;
+    left: 15%;
+    transform: rotate(-10deg);
+    animation-delay: 0s;
+}
+
+.icon-ae {
+    background: linear-gradient(135deg, #1a1a4a, #2a2a80);
+    top: 30%;
+    right: 15%;
+    transform: rotate(15deg);
+    animation-delay: -1.5s;
+}
+
+.icon-cc {
+    background: #111;
+    border: 1px solid #333;
+    top: 60%;
+    left: 8%;
+    transform: rotate(5deg);
+    animation-delay: -3s;
+}
+
+.icon-ps {
+    background: linear-gradient(135deg, #0a2a4a, #154a80);
+    bottom: 20%;
+    right: 10%;
+    transform: rotate(-15deg);
+    animation-delay: -4.5s;
+}
+
+.icon-fb {
+    background: #1877f2;
+    bottom: 10%;
+    left: 30%;
+    transform: rotate(20deg);
+    border-radius: 50%; /* Make this one a circle */
+    animation-delay: -2s;
+}
