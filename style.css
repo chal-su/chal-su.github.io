@@ -226,6 +226,7 @@ body {
     align-items: center;
     z-index: 3;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: float 4s ease-in-out infinite; 
 }
 .floating-widget strong {
     font-size: 1.5rem;
@@ -241,10 +242,12 @@ body {
 .widget-1 {
     top: 15%;
     right: -5%;
+    animation-delay: 0s; 
 }
 .widget-2 {
     bottom: 20%;
     left: -5%;
+    animation-delay: -2s; 
 }
 
 /* Responsive Design */
@@ -273,4 +276,17 @@ body {
     object-fit: cover; 
     border-radius: 32px; 
     pointer-events: none; /* Prevents users from pausing or clicking the video */
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
