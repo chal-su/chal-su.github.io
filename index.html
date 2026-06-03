@@ -273,8 +273,15 @@
                 </div>
             </div>
         </div>
+        
+        <div class="carousel-progress" id="dots-1">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
 
-        <div class="carousel-container" style="margin-top: 2rem;">
+        <div class="carousel-container" style="margin-top: 3rem;">
             <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
@@ -365,23 +372,15 @@
                 </div>
             </div>
         </div>
-        
-        <div class="carousel-progress">
+
+        <div class="carousel-progress" id="dots-2">
             <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
         </div>
 
-        <p style="text-align: center; color: #a1a1aa; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 2rem;">
+        <p style="text-align: center; color: #a1a1aa; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 3rem;">
             Hover to play • Use arrows to skip • Click to view full screen
         </p>
     </section>
@@ -407,48 +406,56 @@
             });
         });
 
-        // 2 & 3. Interactive Dots mapped strictly to Animation Time (Fixes desync and pauses)
-        const dots = document.querySelectorAll('.carousel-progress .dot');
-        const mainTrack = document.querySelector('.track-left');
-        let mainAnim = null;
+        // 2. Real-time mapping logic directly tied to the CSS animation time to prevent desync
+        function setupTracker(trackSelector, dotsId) {
+            const track = document.querySelector(trackSelector);
+            const dotsContainer = document.getElementById(dotsId);
+            const dots = dotsContainer.querySelectorAll('.dot');
+            let anim = null;
 
-        // Fetch the animation object once it initializes
-        setTimeout(() => {
-            const anims = mainTrack.getAnimations();
-            if(anims.length > 0) mainAnim = anims[0];
-        }, 50);
+            // Wait briefly for CSS animations to register on page load
+            setTimeout(() => {
+                const anims = track.getAnimations();
+                if(anims.length > 0) anim = anims[0];
+            }, 50);
 
-        function syncDots() {
-            if (mainAnim) {
-                const duration = mainAnim.effect.getTiming().duration;
-                // Calculate progress (0 to 1)
-                const progress = mainAnim.currentTime / duration;
-                // Map progress to the exact number of dots
-                let activeIndex = Math.floor(progress * dots.length) % dots.length;
-                
-                // Ensure no negative index
-                if (activeIndex < 0) activeIndex = (activeIndex + dots.length) % dots.length;
+            function sync() {
+                if (anim && dots.length > 0) {
+                    const duration = anim.effect.getTiming().duration;
+                    const progress = anim.currentTime / duration;
+                    
+                    // There are 4 unique cards making up the loop
+                    let activeIndex = Math.floor(progress * dots.length) % dots.length;
+                    if (activeIndex < 0) activeIndex = (activeIndex + dots.length) % dots.length;
 
-                dots.forEach((dot, index) => {
-                    if (index === activeIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
+                }
+                requestAnimationFrame(sync);
             }
-            requestAnimationFrame(syncDots);
+            requestAnimationFrame(sync);
         }
-        requestAnimationFrame(syncDots); // Start syncing loop
 
-        // 4. Arrow Navigation Logic (Time Travel through CSS Animation - FIX for disappearing cards)
+        // Initialize both independent dot trackers
+        setupTracker('.track-left', 'dots-1');
+        setupTracker('.track-right', 'dots-2');
+
+        // 3. Pause track when hovering anywhere on the container
+        document.querySelectorAll('.carousel-container').forEach(container => {
+            container.addEventListener('mouseenter', () => {
+                container.querySelector('.carousel-track').style.animationPlayState = 'paused';
+            });
+            container.addEventListener('mouseleave', () => {
+                container.querySelector('.carousel-track').style.animationPlayState = 'running';
+            });
+        });
+
+        // 4. Time Travel Skip Logic (The Fix for disappearing cards)
         document.querySelectorAll('.carousel-arrow').forEach(arrow => {
-            // Keep the track moving when hovering the arrow buttons
+            // Re-engage the animation when hovering the buttons so it doesn't stay paused
             arrow.addEventListener('mouseenter', () => {
                 arrow.parentElement.querySelector('.carousel-track').style.animationPlayState = 'running';
-            });
-            arrow.addEventListener('mouseleave', () => {
-                arrow.parentElement.querySelector('.carousel-track').style.animationPlayState = '';
             });
         });
 
@@ -461,19 +468,15 @@
                 const isLeftTrack = track.classList.contains('track-left');
                 const duration = anim.effect.getTiming().duration;
                 
-                // Calculate exact shift to jump exactly one dot's worth of distance
-                const shiftAmount = duration / dots.length; 
+                // One loop translates 4 cards. So shifting 1 card is exactly duration / 4.
+                const shiftAmount = duration / 4; 
                 
-                // Native scrolling direction adjustment
                 let timeShift = dir === 1 ? shiftAmount : -shiftAmount;
-                if (!isLeftTrack) {
-                    timeShift = -timeShift; 
-                }
+                if (!isLeftTrack) timeShift = -timeShift; 
 
                 let newTime = anim.currentTime + timeShift;
 
-                // CRITICAL FIX: Ensure time securely wraps around the duration bounds
-                // This prevents the track from sliding out of bounds and "deleting" cards
+                // CRITICAL FIX: Loop the time securely within bounds so cards never run out
                 newTime = ((newTime % duration) + duration) % duration;
 
                 anim.currentTime = newTime;
