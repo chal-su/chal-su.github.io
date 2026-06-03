@@ -306,25 +306,6 @@ body {
     animation-delay: -2s; 
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .hero-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 4rem;
-        padding-top: 8rem; /* Adjusted for mobile */
-    }
-    .stats-row, .hero-actions, .badge {
-        justify-content: center;
-    }
-    .hero-description {
-        margin: 0 auto 2rem;
-    }
-    .nav-links {
-        display: none; /* Collapses navigation on mobile */
-    }
-}
-
 /* Phone Mockup Video Styling */
 .phone-video {
     width: 100%;
@@ -385,61 +366,14 @@ body {
 }
 
 /* Strategic Empty Space Positioning */
-.pos-1 { /* Premiere - Top Left */
-    top: 10%;
-    left: 8%;
-    transform: rotate(-10deg);
-    animation-delay: 0s;
-}
-
-.pos-2 { /* After Effects - Top Right */
-    top: 20%;
-    right: 10%;
-    transform: rotate(12deg);
-    animation-delay: -1.5s;
-}
-
-.pos-3 { /* Photoshop - Bottom Left */
-    bottom: 15%;
-    left: 12%;
-    transform: rotate(-15deg);
-    animation-delay: -3s;
-}
-
-.pos-4 { /* DaVinci - Far Right Middle */
-    top: 45%;
-    right: 5%;
-    transform: rotate(8deg);
-    animation-delay: -4.5s;
-}
-
-.pos-5 { /* CapCut - Top Center Gap */
-    top: 5%;
-    left: 45%;
-    transform: rotate(5deg);
-    animation-delay: -1s;
-}
-
-.pos-6 { /* Midjourney - Bottom Center Gap */
-    bottom: 8%;
-    left: 45%;
-    transform: rotate(-8deg);
-    animation-delay: -2.5s;
-}
-
-.pos-7 { /* Facebook - Bottom Right */
-    bottom: 12%;
-    right: 12%;
-    transform: rotate(15deg);
-    animation-delay: -4s;
-}
-
-.pos-8 { /* Instagram - Mid Left Margin */
-    top: 55%;
-    left: 4%;
-    transform: rotate(-12deg);
-    animation-delay: -2s;
-}
+.pos-1 { top: 10%; left: 8%; transform: rotate(-10deg); animation-delay: 0s; }
+.pos-2 { top: 20%; right: 10%; transform: rotate(12deg); animation-delay: -1.5s; }
+.pos-3 { bottom: 15%; left: 12%; transform: rotate(-15deg); animation-delay: -3s; }
+.pos-4 { top: 45%; right: 5%; transform: rotate(8deg); animation-delay: -4.5s; }
+.pos-5 { top: 5%; left: 45%; transform: rotate(5deg); animation-delay: -1s; }
+.pos-6 { bottom: 8%; left: 45%; transform: rotate(-8deg); animation-delay: -2.5s; }
+.pos-7 { bottom: 12%; right: 12%; transform: rotate(15deg); animation-delay: -4s; }
+.pos-8 { top: 55%; left: 4%; transform: rotate(-12deg); animation-delay: -2s; }
 
 /* --- ABOUT SECTION --- */
 .about-section {
@@ -520,21 +454,6 @@ body {
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
     transform: translateY(-2px);
-}
-
-/* Responsive adjustments for the About section on mobile */
-@media (max-width: 1024px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    .about-image {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    .section-title {
-        font-size: 2.5rem;
-    }
 }
 
 /* --- SERVICES SECTION --- */
@@ -622,23 +541,6 @@ body {
     line-height: 1.6;
 }
 
-/* Responsive adjustments for Tablets and Mobile */
-@media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    .services-header {
-        text-align: center;
-        margin: 0 auto 3rem auto;
-    }
-}
-
 /* --- WORKS SECTION (SCROLLING CAROUSEL) --- */
 .works-section {
     padding: 6rem 0; /* No side padding so it stretches full width */
@@ -704,7 +606,7 @@ body {
 }
 
 .carousel-container {
-    width: 100vw;
+    width: 100%; /* CRITICAL MOBILE FIX: changed from 100vw to perfectly align with screen */
     overflow: hidden;
     position: relative;
     display: flex;
@@ -781,7 +683,7 @@ body {
     right: 3%;
 }
 
-/* Two different animations for opposite directions (Sped up for more life) */
+/* Two different animations for opposite directions */
 .track-left {
     animation: scrollLeft 25s linear infinite; 
 }
@@ -822,14 +724,14 @@ body {
     box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
 }
 
-/* Upgraded Individual Portfolio Cards (Framed Concept & Smaller Size) */
+/* Upgraded Individual Portfolio Cards */
 .carousel-card {
-    width: 220px; /* Reduced width */
-    height: 380px; /* Reduced height */
+    width: 220px; 
+    height: 380px; 
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 6px; /* Outer frame encapsulating the video */
+    padding: 6px; 
     position: relative;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -840,7 +742,7 @@ body {
 .carousel-card video {
     width: 100%;
     height: 100%;
-    border-radius: 14px; /* Inner radius matching frame */
+    border-radius: 14px; 
     object-fit: cover;
     opacity: 0.6;
     transition: all 0.4s ease;
@@ -858,7 +760,7 @@ body {
     opacity: 1; /* Lights up the video when hovered */
 }
 
-/* Adjusted Overlays to account for the new padding frame & smaller size */
+/* Adjusted Overlays */
 .card-info {
     position: absolute;
     bottom: 6px; 
@@ -899,7 +801,7 @@ body {
     width: calc(100% - 12px);
     height: calc(100% - 12px);
     border-radius: 14px;
-    background: rgba(168, 85, 247, 0.3); /* Lighter purple tint */
+    background: rgba(168, 85, 247, 0.3); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -907,7 +809,7 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    pointer-events: none; /* Crucial: allows video hover to work under it */
+    pointer-events: none; 
 }
 
 .carousel-card:hover .play-overlay {
@@ -959,6 +861,43 @@ body {
     max-height: 85vh; 
 }
 
+/* NEW: Success Notification Modal specific styles */
+.success-content {
+    width: 90%;
+    max-width: 400px;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-icon-wrapper {
+    background: linear-gradient(135deg, #4ade80, #22c55e); /* Vibrant green gradient */
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4);
+}
+
+.success-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.success-desc {
+    font-size: 0.95rem;
+    color: #a1a1aa;
+    line-height: 1.6;
+}
+
 .close-btn {
     position: absolute;
     top: 15px;
@@ -978,14 +917,6 @@ body {
     100% { transform: scale(1); opacity: 1; }
 }
 
-@media (max-width: 768px) {
-    .close-btn {
-        right: 15px;
-        top: 15px;
-        z-index: 10;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-}
 
 /* --- CONTACT SECTION --- */
 .contact-section {
@@ -1181,8 +1112,34 @@ body {
     box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
 }
 
-/* Responsive updates for Contact Section */
+/* --- OVERHAULED MOBILE RESPONSIVENESS --- */
 @media (max-width: 1024px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 4rem;
+        padding-top: 8rem;
+    }
+    .stats-row, .hero-actions, .badge {
+        justify-content: center;
+    }
+    .hero-description {
+        margin: 0 auto 2rem;
+    }
+    .nav-links {
+        display: none;
+    }
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .about-image {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -1191,12 +1148,66 @@ body {
         padding: 2rem;
     }
 }
+
+/* Master Mobile Scale-down */
 @media (max-width: 768px) {
+    .hero-section {
+        padding-top: 6rem; /* Prevents collision with header */
+    }
+    .hero-title {
+        font-size: 2.5rem; /* Downscaled perfectly for phones */
+        line-height: 1.1;
+    }
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    .section-title {
+        font-size: 2.2rem; /* Downscaled perfectly for phones */
+    }
+    .contact-info-title {
+        font-size: 1.25rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+    .phone-mockup {
+        /* Prevents the 3D phone model from breaking the horizontal boundary on small phones */
+        transform: perspective(1200px) rotateX(8deg) rotateY(-15deg) rotateZ(3deg) scale(0.8);
+        margin-top: -2rem; 
+    }
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
+    }
+    .about-grid {
+        gap: 2rem;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .services-header {
+        text-align: center;
+        margin: 0 auto 3rem auto;
+    }
     .form-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
     .contact-header {
         text-align: center;
+    }
+    .contact-form-container {
+        padding: 1.5rem; /* Better edge-padding on phones */
+    }
+    .close-btn {
+        right: 15px;
+        top: 15px;
+        z-index: 10;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 }
