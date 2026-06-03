@@ -69,12 +69,19 @@ body {
 
 /* Navigation */
 .navbar {
+    position: fixed; /* Locks the header to the screen */
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    max-width: 1400px;
-    margin: 0 auto;
+    z-index: 1000; /* Keeps it above all scrolling content */
+    background: rgba(8, 8, 12, 0.85); /* Deep dark transparent background */
+    backdrop-filter: blur(16px); /* Glassmorphism effect on scroll */
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 .logo {
     font-size: 1.5rem;
@@ -104,7 +111,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    padding: 4rem 5%;
+    padding: 8rem 5% 4rem 5%; /* Increased top padding so the fixed navbar doesn't cover content */
     max-width: 1400px;
     margin: 0 auto;
     align-items: center;
@@ -305,7 +312,7 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 4rem;
-        padding-top: 2rem;
+        padding-top: 8rem; /* Adjusted for mobile */
     }
     .stats-row, .hero-actions, .badge {
         justify-content: center;
