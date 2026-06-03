@@ -293,9 +293,10 @@
         let activeSyncLoops = []; // Keeps track of animation frame loops so we can reset them on filter
 
         function createCardHTML(item) {
+            const posterSrc = item.src.replace('.mp4', '.jpg'); // Automatically generates thumbnail from Cloudinary URL
             return `
                 <div class="carousel-card glass" onclick="openModal('${item.src}')">
-                    <video src="${item.src}" preload="none" muted loop playsinline></video>
+                    <video src="${item.src}" poster="${posterSrc}" preload="none" muted loop playsinline></video>
                     <div class="play-overlay">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
                     </div>
