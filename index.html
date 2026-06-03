@@ -630,6 +630,9 @@
             if (event.target == modal) closeModal();
             if (event.target == successModal) closeSuccessModal();
         }
+
+        // 7. NEW: DISABLE RIGHT-CLICK (CONTEXT MENU)
+        document.addEventListener('contextmenu', event => event.preventDefault());
     </script>
 </body>
 </html>
