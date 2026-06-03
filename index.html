@@ -407,33 +407,41 @@
             });
         });
 
-        // 2. Interactive Dots Logic
+        // 2 & 3. Interactive Dots mapped strictly to Animation Time (Fixes desync and pauses)
         const dots = document.querySelectorAll('.carousel-progress .dot');
-        let currentDot = 0;
-        let dotInterval;
+        const mainTrack = document.querySelector('.track-left');
+        let mainAnim = null;
 
-        function startDots() {
-            dotInterval = setInterval(() => {
-                dots[currentDot].classList.remove('active');
-                currentDot = (currentDot + 1) % dots.length;
-                dots[currentDot].classList.add('active');
-            }, 1800); 
+        // Fetch the animation object once it initializes
+        setTimeout(() => {
+            const anims = mainTrack.getAnimations();
+            if(anims.length > 0) mainAnim = anims[0];
+        }, 50);
+
+        function syncDots() {
+            if (mainAnim) {
+                const duration = mainAnim.effect.getTiming().duration;
+                // Calculate progress (0 to 1)
+                const progress = mainAnim.currentTime / duration;
+                // Map progress to the exact number of dots
+                let activeIndex = Math.floor(progress * dots.length) % dots.length;
+                
+                // Ensure no negative index
+                if (activeIndex < 0) activeIndex = (activeIndex + dots.length) % dots.length;
+
+                dots.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            requestAnimationFrame(syncDots);
         }
+        requestAnimationFrame(syncDots); // Start syncing loop
 
-        function stopDots() {
-            clearInterval(dotInterval);
-        }
-
-        startDots(); 
-
-        // 3. Pause carousel tracking when hovering cards
-        const carouselContainers = document.querySelectorAll('.carousel-container');
-        carouselContainers.forEach(container => {
-            container.addEventListener('mouseenter', stopDots);
-            container.addEventListener('mouseleave', startDots);
-        });
-
-        // 4. Arrow Navigation Logic (Time Travel through CSS Animation)
+        // 4. Arrow Navigation Logic (Time Travel through CSS Animation - FIX for disappearing cards)
         document.querySelectorAll('.carousel-arrow').forEach(arrow => {
             // Keep the track moving when hovering the arrow buttons
             arrow.addEventListener('mouseenter', () => {
@@ -447,17 +455,28 @@
         function moveCarousel(btn, dir) {
             const track = btn.parentElement.querySelector('.carousel-track');
             const anims = track.getAnimations();
+            
             if (anims && anims.length > 0) {
                 const anim = anims[0];
                 const isLeftTrack = track.classList.contains('track-left');
-                let shift = 2500; // Shifts the animation by 2.5s (about 1 card width)
+                const duration = anim.effect.getTiming().duration;
                 
-                // Calculates the exact time shift based on native scrolling direction
-                if (isLeftTrack) {
-                    anim.currentTime += (dir === -1 ? shift : -shift);
-                } else {
-                    anim.currentTime += (dir === -1 ? -shift : shift);
+                // Calculate exact shift to jump exactly one dot's worth of distance
+                const shiftAmount = duration / dots.length; 
+                
+                // Native scrolling direction adjustment
+                let timeShift = dir === 1 ? shiftAmount : -shiftAmount;
+                if (!isLeftTrack) {
+                    timeShift = -timeShift; 
                 }
+
+                let newTime = anim.currentTime + timeShift;
+
+                // CRITICAL FIX: Ensure time securely wraps around the duration bounds
+                // This prevents the track from sliding out of bounds and "deleting" cards
+                newTime = ((newTime % duration) + duration) % duration;
+
+                anim.currentTime = newTime;
             }
         }
 
