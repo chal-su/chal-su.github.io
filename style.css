@@ -30,11 +30,33 @@ body {
     background: rgba(107, 33, 168, 0.6);
 }
 .glow-teal {
-    bottom: 0%;
+    top: 5%;
     right: -5%;
     width: 500px;
     height: 500px;
     background: rgba(20, 184, 166, 0.3);
+}
+/* New Extended Glows for more vibrant background */
+.glow-violet-mid {
+    top: 35%;
+    left: -10%;
+    width: 700px;
+    height: 700px;
+    background: rgba(139, 92, 246, 0.35);
+}
+.glow-purple-right {
+    top: 55%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: rgba(168, 85, 247, 0.25);
+}
+.glow-teal-bottom {
+    top: 85%;
+    left: 10%;
+    width: 800px;
+    height: 800px;
+    background: rgba(45, 212, 191, 0.25);
 }
 
 /* Glassmorphism Utility Class */
@@ -425,7 +447,7 @@ body {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr; /* Image takes slightly less space than the text */
     gap: 5rem;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .about-image {
@@ -535,20 +557,29 @@ body {
     gap: 1.5rem;
 }
 
+/* Upgraded Glassmorphism for Service Cards */
 .service-card {
     padding: 2.5rem;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.02);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Top highlight for 3D glass edge */
+    border-left: 1px solid rgba(255, 255, 255, 0.15); /* Left highlight for 3D glass edge */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy, dynamic hover */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: relative;
 }
 
 .service-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-8px) scale(1.02); /* Slight scale for an "alive" pop */
+    border-color: rgba(216, 180, 254, 0.5); /* Glowing border effect */
+    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(216, 180, 254, 0.1);
 }
 
 .service-card:hover .service-icon {
