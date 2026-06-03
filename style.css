@@ -703,67 +703,96 @@ body {
     animation-play-state: paused;
 }
 
-/* Two different animations for opposite directions */
+/* Two different animations for opposite directions (Sped up for more life) */
 .track-left {
-    animation: scrollLeft 35s linear infinite;
+    animation: scrollLeft 20s linear infinite; 
 }
 .track-right {
-    /* Starts halfway shifted so it doesn't look identical to the top row */
-    animation: scrollRight 40s linear infinite reverse; 
+    animation: scrollRight 25s linear infinite reverse; 
 }
 
 @keyframes scrollLeft {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Moves left exactly half its width (1 set of cards) */
+    100% { transform: translateX(-50%); } 
 }
 @keyframes scrollRight {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* Individual Portfolio Cards */
+/* Interactive Mapping Dots */
+.carousel-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3rem;
+}
+
+.carousel-progress .dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.carousel-progress .dot.active {
+    width: 24px;
+    background: #2dd4bf; /* Matches the teal glow theme */
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
+}
+
+/* Upgraded Individual Portfolio Cards (Framed Concept) */
 .carousel-card {
-    width: 280px; /* Mobile-first vertical ratio */
+    width: 280px; 
     height: 480px;
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px; /* Creates the outer frame encapsulating the video */
     position: relative;
-    overflow: hidden;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     flex-shrink: 0;
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.02), 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .carousel-card video {
     width: 100%;
     height: 100%;
+    border-radius: 16px; /* Inner radius to match the frame padding */
     object-fit: cover;
     opacity: 0.6;
-    transition: opacity 0.4s ease;
+    transition: all 0.4s ease;
 }
 
 .carousel-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
-    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.05), 0 15px 40px rgba(168, 85, 247, 0.3);
+    border-color: rgba(168, 85, 247, 0.5);
     z-index: 10;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .carousel-card:hover video {
     opacity: 1; /* Lights up the video when hovered */
 }
 
-/* Gradient overlay at the bottom of the card for text readability */
+/* Adjusted Overlays to account for the new 8px padding frame */
 .card-info {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 8px; /* Shifted to sit inside the frame */
+    left: 8px; /* Shifted to sit inside the frame */
+    width: calc(100% - 16px);
     padding: 4rem 1.5rem 1.5rem 1.5rem;
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    pointer-events: none; /* Allows hovering the video directly */
+    pointer-events: none; 
     transform: translateY(10px);
     transition: transform 0.3s ease;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .carousel-card:hover .card-info {
@@ -785,16 +814,48 @@ body {
     margin-top: 0.3rem;
 }
 
+.play-overlay {
+    position: absolute;
+    top: 8px; /* Shifted to sit inside the frame */
+    left: 8px; /* Shifted to sit inside the frame */
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    border-radius: 16px;
+    background: rgba(168, 85, 247, 0.3); /* Lighter purple tint */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none; /* Crucial: allows video hover to work under it */
+}
+
+.carousel-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.play-overlay svg {
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.carousel-card:hover .play-overlay svg {
+    transform: scale(1.1);
+}
+
 /* --- POP-UP MODAL STYLES --- */
 .modal {
-    display: none; /* Hidden by default, JS controls this */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 2000;
-    background: rgba(8, 8, 12, 0.95); /* Deep dark backdrop */
+    background: rgba(8, 8, 12, 0.95); 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     justify-content: center;
@@ -803,7 +864,7 @@ body {
 
 .modal-content {
     width: 90%;
-    max-width: 450px; /* Constrains it for a nice vertical mobile-style video playback */
+    max-width: 450px; 
     border-radius: 24px;
     padding: 10px;
     background: rgba(255, 255, 255, 0.05);
@@ -817,7 +878,7 @@ body {
     width: 100%;
     border-radius: 16px;
     background: #000;
-    max-height: 85vh; /* Prevents extremely tall videos from breaking the screen */
+    max-height: 85vh; 
 }
 
 .close-btn {
