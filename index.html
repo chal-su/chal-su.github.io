@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charles Adrian G. Vitto | Video Editor</title>
-    <!-- Sleek, inline SVG Favicon matching the purple theme -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%231f1f22'/><path d='M38 28 L72 50 L38 72 Z' fill='%23a855f7'/></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Ambient Background Glows (Expanded for more life) -->
     <div class="glow glow-purple"></div>
     <div class="glow glow-teal"></div>
     <div class="glow glow-violet-mid"></div>
@@ -175,7 +173,6 @@
         </div>
     </section>
 
-    <!-- WORKS SECTION OVERHAULED FOR DYNAMIC 56-VIDEO ARRAY & FILTERING -->
     <section id="works" class="works-section">
         <div class="works-header">
             <div class="badge glass">
@@ -185,7 +182,6 @@
             <p class="works-subtitle">A selection of projects across paid ads, content creation, and brand campaigns.</p>
         </div>
 
-        <!-- NEW: Dedicated Filtering Menu -->
         <div class="portfolio-filters">
             <button class="filter-btn active" data-filter="all">All Works</button>
             <button class="filter-btn" data-filter="Health">Health & Wellness</button>
@@ -194,7 +190,6 @@
             <button class="filter-btn" data-filter="Pets">Pets</button>
         </div>
 
-        <!-- First Row: Scrolls Left -->
         <div class="carousel-container">
             <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -202,13 +197,12 @@
             <button class="carousel-arrow arrow-right" onclick="moveCarousel(this, 1)">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
-            <!-- Javascript will inject the cards here dynamically -->
+
             <div class="carousel-track track-left" id="track-1"></div>
         </div>
         
         <div class="carousel-progress" id="dots-1"></div>
 
-        <!-- Second Row: Scrolls Right -->
         <div class="carousel-container" style="margin-top: 3rem;">
             <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -216,7 +210,7 @@
             <button class="carousel-arrow arrow-right" onclick="moveCarousel(this, 1)">
                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
-            <!-- Javascript will inject the cards here dynamically -->
+
             <div class="carousel-track track-right" id="track-2"></div>
         </div>
 
@@ -234,66 +228,65 @@
         </div>
     </div>
 
-    <!-- NEW: Master Script managing the 56 Array, Filtering, Tracks, and Hover Logic -->
     <script>
         // 1. THE EXACT 56-ITEM PORTFOLIO DATABASE BASED ON YOUR SCREENSHOT
         const allPortfolioData = [
-            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place", src: "https://wanderbites.alwaysdata.net/bar.mp4" },
-            { filter: "Products", category: "Education", title: "Kids Encyclopedia Book", src: "https://wanderbites.alwaysdata.net/book.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp1.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp2.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp3.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp4.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp5.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp6.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp7.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp8.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://wanderbites.alwaysdata.net/bp9.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv1.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv2.mp4" },
-            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://wanderbites.alwaysdata.net/cctv3.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish1.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish2.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish3.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish4.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish5.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish6.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish7.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish8.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish9.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish10.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish11.mp4" },
-            { filter: "Lifestyle", category: "Food & Beverage", title: "Vibing Place with Friends", src: "https://wanderbites.alwaysdata.net/dish12.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Gut Supplement for Dogs", src: "https://wanderbites.alwaysdata.net/dog.mp4" },
-            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine", src: "https://wanderbites.alwaysdata.net/elder.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk1.mp4" },
-            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler Product", src: "https://wanderbites.alwaysdata.net/gk2.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Gut Health", src: "https://wanderbites.alwaysdata.net/guts1.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid1.mp4" },
-            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://wanderbites.alwaysdata.net/kid2.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Silversticks for Cats", src: "https://wanderbites.alwaysdata.net/showreel.mp4" }, 
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool1.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool2.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool3.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool4.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool5.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool6.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool7.mp4" },
-            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://wanderbites.alwaysdata.net/tool8.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest1.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest2.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest3.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://wanderbites.alwaysdata.net/vest4.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl1.mp4" },
-            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://wanderbites.alwaysdata.net/vinyl2.mp4" }
+            { filter: "Health", category: "Elderly Care", title: "Elderly Medicine", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495491/elder_jyhezm.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495489/Gk_p8wqte.mp4" },
+            { filter: "Pets", category: "Pet Products", title: "Silversticks for Cats", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495488/showreel_rpxak4.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495487/Gk2_afelup.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Gut Health", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495485/guts1_ctdsry.mp4" },
+            { filter: "Pets", category: "Pet Health", title: "Gut Supplement for Dogs", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/dog_sziwni.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/bp9_buzatz.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495482/Bp6_dci5lt.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495481/bp_s7b0gm.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495480/bp5_oumc8h.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495480/bp2_sryp0f.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495480/Bp8_bbrvxn.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495480/cctv_tzhf2d.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495479/Bp3_utm9hg.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495479/Bp4_gm4jur.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493434/bp7_j01nt8.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493430/cctv2_y4wqmw.mp4" },
+            { filter: "Products", category: "Home & Garden", title: "Garden Kneeler", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493430/gk1_aj5pr6.mp4" },
+            { filter: "Products", category: "Education", title: "Kids Encyclopedia Book", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493429/book_kwa1o2.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493428/kid_bbqcei.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493428/cctv3_nfyfty.mp4" },
+            { filter: "Products", category: "Tech", title: "Home CCTV Camera", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493427/cctv1_nvqq0g.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493420/tool5_jnfmjf.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493420/vest2_pjiomp.mp4" },
+            { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493420/bp1_nnghnk.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493419/tool8_qw6c2e.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Bar Drinking Place", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493414/bar_buduz6.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493411/kid1_fvysgl.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493410/tool_xf8wus.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493410/vinyl1_gnbcxn.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493409/tool3_nbanf1.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493409/tool2_yq2dow.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493408/dish8_pwhrf7.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493404/tool4_vhvath.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493403/tool7_se5gto.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493403/tool1_c7sm48.mp4" },
+            { filter: "Health", category: "Supplements", title: "Kids Health Supplement", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493403/kid2_yhn5sz.mp4" },
+            { filter: "Products", category: "Tools", title: "Wrench Tool Multipurpose", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493403/tool6_jiw6rz.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493395/vinyl2_t11xvg.mp4" },
+            { filter: "Products", category: "Media", title: "Vinyl Record Product", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493393/vinyl_dlsnsj.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493391/dish7_eynmho.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493390/dish11_rfjmqa.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493389/dish9_hxdj35.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493389/dish10_iiapgw.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493387/dish4_uwbpeo.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493379/dish3_e6a32j.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493379/dish2_poq1ml.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493378/dish_jj3wrt.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493377/dish5_ugykf4.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493377/dish6_y7f3qs.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493375/dish12_df973c.mp4" },
+            { filter: "Lifestyle", category: "Lifestyle", title: "Vibing Place with Friends", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493374/dish1_arbefl.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493373/vest1_uedrtb.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest3_cycsdu.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest4_aavbsq.mp4" },
+            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest_vkdzsb.mp4" }
         ];
 
         // 2. DYNAMIC RENDERING LOGIC
