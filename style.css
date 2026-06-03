@@ -695,6 +695,7 @@ body {
     display: flex;
     gap: 2rem;
     width: max-content;
+    padding-right: 2rem; /* CRITICAL FIX: Secures the seamless CSS math loop */
     will-change: transform;
 }
 
@@ -743,10 +744,10 @@ body {
 
 /* Two different animations for opposite directions (Sped up for more life) */
 .track-left {
-    animation: scrollLeft 20s linear infinite; 
+    animation: scrollLeft 18s linear infinite; 
 }
 .track-right {
-    animation: scrollRight 25s linear infinite reverse; 
+    animation: scrollRight 22s linear infinite reverse; 
 }
 
 @keyframes scrollLeft {
@@ -764,7 +765,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 .carousel-progress .dot {
@@ -782,14 +783,14 @@ body {
     box-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
 }
 
-/* Upgraded Individual Portfolio Cards (Framed Concept) */
+/* Upgraded Individual Portfolio Cards (Framed Concept & Smaller Size) */
 .carousel-card {
-    width: 280px; 
-    height: 480px;
-    border-radius: 24px;
+    width: 220px; /* Reduced width */
+    height: 380px; /* Reduced height */
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px; /* Creates the outer frame encapsulating the video */
+    padding: 6px; /* Outer frame encapsulating the video */
     position: relative;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -800,7 +801,7 @@ body {
 .carousel-card video {
     width: 100%;
     height: 100%;
-    border-radius: 16px; /* Inner radius to match the frame padding */
+    border-radius: 14px; /* Inner radius matching frame */
     object-fit: cover;
     opacity: 0.6;
     transition: all 0.4s ease;
@@ -818,19 +819,19 @@ body {
     opacity: 1; /* Lights up the video when hovered */
 }
 
-/* Adjusted Overlays to account for the new 8px padding frame */
+/* Adjusted Overlays to account for the new padding frame & smaller size */
 .card-info {
     position: absolute;
-    bottom: 8px; /* Shifted to sit inside the frame */
-    left: 8px; /* Shifted to sit inside the frame */
-    width: calc(100% - 16px);
-    padding: 4rem 1.5rem 1.5rem 1.5rem;
+    bottom: 6px; 
+    left: 6px; 
+    width: calc(100% - 12px);
+    padding: 3rem 1.2rem 1.2rem 1.2rem;
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
     pointer-events: none; 
     transform: translateY(10px);
     transition: transform 0.3s ease;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 .carousel-card:hover .card-info {
@@ -838,7 +839,7 @@ body {
 }
 
 .card-category {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #d8b4fe;
     font-weight: 800;
     text-transform: uppercase;
@@ -846,7 +847,7 @@ body {
 }
 
 .card-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #fff;
     margin-top: 0.3rem;
@@ -854,11 +855,11 @@ body {
 
 .play-overlay {
     position: absolute;
-    top: 8px; /* Shifted to sit inside the frame */
-    left: 8px; /* Shifted to sit inside the frame */
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
-    border-radius: 16px;
+    top: 6px; 
+    left: 6px; 
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    border-radius: 14px;
     background: rgba(168, 85, 247, 0.3); /* Lighter purple tint */
     display: flex;
     justify-content: center;
@@ -902,7 +903,7 @@ body {
 
 .modal-content {
     width: 90%;
-    max-width: 450px; 
+    max-width: 400px; 
     border-radius: 24px;
     padding: 10px;
     background: rgba(255, 255, 255, 0.05);
