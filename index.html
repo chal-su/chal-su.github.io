@@ -301,8 +301,9 @@
             </div>
 
             <div class="contact-form-container glass">
-                <form action="https://formsubmit.co/vittocharlesadrian@gmail.com" method="POST" class="contact-form">
+                <form id="contactForm" action="https://formsubmit.co/ajax/vittocharlesadrian@gmail.com" method="POST" class="contact-form">
                     <input type="hidden" name="_subject" value="New Portfolio Inquiry!">
+                    <input type="hidden" name="_captcha" value="false">
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -351,6 +352,17 @@
         <div class="modal-content glass">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <video id="modalVideo" controls autoplay playsinline></video>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="success-content glass">
+            <div class="success-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 class="success-title">Message Sent!</h3>
+            <p class="success-desc">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+            <button class="submit-btn" onclick="closeSuccessModal()" style="width: 100%; justify-content: center; margin-top: 1.5rem;">Done</button>
         </div>
     </div>
 
@@ -416,10 +428,10 @@
         ];
 
         // 2. DYNAMIC RENDERING LOGIC
-        let activeSyncLoops = []; // Keeps track of animation frame loops so we can reset them on filter
+        let activeSyncLoops = []; 
 
         function createCardHTML(item) {
-            const posterSrc = item.src.replace('.mp4', '.jpg'); // Automatically generates thumbnail from Cloudinary URL
+            const posterSrc = item.src.replace('.mp4', '.jpg'); 
             return `
                 <div class="carousel-card glass" onclick="openModal('${item.src}')">
                     <video src="${item.src}" poster="${posterSrc}" preload="none" muted loop playsinline></video>
@@ -435,11 +447,9 @@
         }
 
         function buildTracksAndDots(filteredData) {
-            // Cancel old animation loops to prevent lag/glitches when filtering
             activeSyncLoops.forEach(id => cancelAnimationFrame(id));
             activeSyncLoops = [];
 
-            // Split the data evenly for the two rows
             const halfLength = Math.ceil(filteredData.length / 2);
             const row1Data = filteredData.slice(0, halfLength);
             const row2Data = filteredData.slice(halfLength);
@@ -448,21 +458,17 @@
                 const track = document.getElementById(trackId);
                 const dotsContainer = document.getElementById(dotsId);
 
-                // If no items in this row (e.g., highly filtered), clear it out safely
                 if (items.length === 0) {
                     track.innerHTML = '';
                     dotsContainer.innerHTML = '';
                     return;
                 }
 
-                // Generate HTML for the exact items, then double it for the infinite loop math
                 let cardsHTML = items.map(createCardHTML).join('');
                 track.innerHTML = cardsHTML + cardsHTML;
 
-                // Create the exact number of tracking dots for the items present
                 dotsContainer.innerHTML = items.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}"></span>`).join('');
 
-                // Apply Hover listeners to newly created elements
                 track.querySelectorAll('.carousel-card').forEach(card => {
                     const video = card.querySelector('video');
                     card.addEventListener('mouseenter', () => video.play());
@@ -472,12 +478,10 @@
                     });
                 });
 
-                // Restart the CSS Animation to properly grab the newly injected DOM elements
                 track.style.animation = 'none';
-                track.offsetHeight; /* Trigger reflow */
+                track.offsetHeight; 
                 track.style.animation = null; 
 
-                // Wait 50ms for CSS to catch up, then start Dot Syncing
                 setTimeout(() => {
                     const anims = track.getAnimations();
                     if(anims.length > 0) {
@@ -502,7 +506,6 @@
             populate('track-1', 'dots-1', row1Data);
             populate('track-2', 'dots-2', row2Data);
             
-            // Re-apply hover pause logic for containers
             document.querySelectorAll('.carousel-container').forEach(container => {
                 const track = container.querySelector('.carousel-track');
                 container.onmouseenter = () => { if(track) track.style.animationPlayState = 'paused'; }
@@ -510,18 +513,15 @@
             });
         }
 
-        // Initialize with all data on page load
         buildTracksAndDots(allPortfolioData);
 
         // 3. FILTERING MENU LOGIC
         const filterBtns = document.querySelectorAll('.filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active button styling
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Filter the array
                 const filterValue = btn.getAttribute('data-filter');
                 if (filterValue === 'all') {
                     buildTracksAndDots(allPortfolioData);
@@ -550,12 +550,10 @@
                 const isLeftTrack = track.classList.contains('track-left');
                 const duration = anim.effect.getTiming().duration;
                 
-                // Read the actual amount of unique cards currently in this specific track
                 const dotsContainer = btn.parentElement.nextElementSibling;
                 const rowLength = dotsContainer.querySelectorAll('.dot').length;
                 if (rowLength === 0) return;
 
-                // Shift by exactly one card width mathematically
                 const shiftAmount = duration / rowLength; 
                 
                 let timeShift = dir === 1 ? shiftAmount : -shiftAmount;
@@ -584,10 +582,53 @@
             modalVideo.src = '';
         }
 
+        // 6. NEW: AJAX FORM SUBMISSION INTERCEPT
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents the default redirect
+
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    successModal.style.display = 'flex';
+                    contactForm.reset();
+                } else {
+                    alert('Oops! There was a problem submitting your form');
+                }
+            })
+            .catch(error => {
+                alert('Oops! There was a problem submitting your form');
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+            });
+        });
+
+        function closeSuccessModal() {
+            successModal.style.display = 'none';
+        }
+
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) closeModal();
+            if (event.target == successModal) closeSuccessModal();
         }
     </script>
 </body>
