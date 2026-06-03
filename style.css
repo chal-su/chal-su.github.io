@@ -346,12 +346,13 @@ body {
     animation: float 6s ease-in-out infinite; 
 }
 
-/* Makes the actual logos fit perfectly inside the dark boxes */
+/* Makes the actual logos fit perfectly inside the dark boxes and turns them white */
 .icon-box img {
     width: 55%;
     height: 55%;
     object-fit: contain;
     opacity: 0.9;
+    filter: invert(1); /* Forces the black SVG files to display as crisp white */
 }
 
 /* Strategic Empty Space Positioning */
