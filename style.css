@@ -781,12 +781,12 @@ body {
     right: 3%;
 }
 
-/* Two different animations for opposite directions (Sped up for more life) */
+/* Two different animations for opposite directions (Slowed down slightly) */
 .track-left {
-    animation: scrollLeft 18s linear infinite; 
+    animation: scrollLeft 25s linear infinite; 
 }
 .track-right {
-    animation: scrollRight 22s linear infinite reverse; 
+    animation: scrollRight 30s linear infinite reverse; 
 }
 
 @keyframes scrollLeft {
