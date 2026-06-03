@@ -183,6 +183,13 @@
         </div>
 
         <div class="carousel-container">
+            <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-arrow arrow-right" onclick="moveCarousel(this, 1)">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
             <div class="carousel-track track-left">
                 <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
                     <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
@@ -268,6 +275,13 @@
         </div>
 
         <div class="carousel-container" style="margin-top: 2rem;">
+            <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-arrow arrow-right" onclick="moveCarousel(this, 1)">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
             <div class="carousel-track track-right">
                 <div class="carousel-card glass" onclick="openModal('https://wanderbites.alwaysdata.net/showreel.mp4')">
                     <video src="https://wanderbites.alwaysdata.net/showreel.mp4" muted loop playsinline></video>
@@ -351,7 +365,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="carousel-progress">
             <span class="dot active"></span>
             <span class="dot"></span>
@@ -367,8 +381,8 @@
             <span class="dot"></span>
         </div>
 
-        <p style="text-align: center; color: #a1a1aa; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 1.5rem;">
-            Hover to play • Click to view full screen
+        <p style="text-align: center; color: #a1a1aa; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 2rem;">
+            Hover to play • Use arrows to skip • Click to view full screen
         </p>
     </section>
 
@@ -389,7 +403,7 @@
             });
             card.addEventListener('mouseleave', () => {
                 video.pause();
-                video.currentTime = 0; // Resets the video to the start
+                video.currentTime = 0; 
             });
         });
 
@@ -403,23 +417,51 @@
                 dots[currentDot].classList.remove('active');
                 currentDot = (currentDot + 1) % dots.length;
                 dots[currentDot].classList.add('active');
-            }, 1800); // Cycles active dot to match scroll speed
+            }, 1800); 
         }
 
         function stopDots() {
             clearInterval(dotInterval);
         }
 
-        startDots(); // Start immediately
+        startDots(); 
 
-        // Pause both carousel and dots when user hovers
+        // 3. Pause carousel tracking when hovering cards
         const carouselContainers = document.querySelectorAll('.carousel-container');
         carouselContainers.forEach(container => {
             container.addEventListener('mouseenter', stopDots);
             container.addEventListener('mouseleave', startDots);
         });
 
-        // 3. Modal Popup Logic
+        // 4. Arrow Navigation Logic (Time Travel through CSS Animation)
+        document.querySelectorAll('.carousel-arrow').forEach(arrow => {
+            // Keep the track moving when hovering the arrow buttons
+            arrow.addEventListener('mouseenter', () => {
+                arrow.parentElement.querySelector('.carousel-track').style.animationPlayState = 'running';
+            });
+            arrow.addEventListener('mouseleave', () => {
+                arrow.parentElement.querySelector('.carousel-track').style.animationPlayState = '';
+            });
+        });
+
+        function moveCarousel(btn, dir) {
+            const track = btn.parentElement.querySelector('.carousel-track');
+            const anims = track.getAnimations();
+            if (anims && anims.length > 0) {
+                const anim = anims[0];
+                const isLeftTrack = track.classList.contains('track-left');
+                let shift = 2500; // Shifts the animation by 2.5s (about 1 card width)
+                
+                // Calculates the exact time shift based on native scrolling direction
+                if (isLeftTrack) {
+                    anim.currentTime += (dir === -1 ? shift : -shift);
+                } else {
+                    anim.currentTime += (dir === -1 ? -shift : shift);
+                }
+            }
+        }
+
+        // 5. Modal Popup Logic
         const modal = document.getElementById('videoModal');
         const modalVideo = document.getElementById('modalVideo');
         
@@ -435,7 +477,6 @@
             modalVideo.src = '';
         }
 
-        // Close modal when clicking anywhere outside the video
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
