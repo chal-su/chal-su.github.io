@@ -545,14 +545,13 @@ body {
     justify-content: flex-start;
 }
 
-.service-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.15);
+.service-card:hover .service-icon {
+    background: rgba(216, 180, 254, 0.1);
+    color: #a855f7;
+    border-color: rgba(216, 180, 254, 0.3);
 }
 
 .service-icon {
-    font-size: 2rem;
     margin-bottom: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     width: 60px;
@@ -562,6 +561,8 @@ body {
     align-items: center;
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #d8b4fe;
+    transition: all 0.3s ease;
 }
 
 .service-title {
