@@ -781,7 +781,7 @@ body {
     right: 3%;
 }
 
-/* Two different animations for opposite directions */
+/* Two different animations for opposite directions (Sped up for more life) */
 .track-left {
     animation: scrollLeft 25s linear infinite; 
 }
