@@ -545,6 +545,12 @@ body {
     justify-content: flex-start;
 }
 
+.service-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
 .service-card:hover .service-icon {
     background: rgba(216, 180, 254, 0.1);
     color: #a855f7;
