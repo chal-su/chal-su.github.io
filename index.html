@@ -301,27 +301,29 @@
             </div>
 
             <div class="contact-form-container glass">
-                <form action="#" method="POST" class="contact-form">
+                <form action="https://formsubmit.co/vittocharlesadrian@gmail.com" method="POST" class="contact-form">
+                    <input type="hidden" name="_subject" value="New Portfolio Inquiry!">
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" placeholder="Juan" required>
+                            <input type="text" name="First Name" placeholder="Juan" required>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" placeholder="dela Cruz" required>
+                            <input type="text" name="Last Name" placeholder="dela Cruz" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" placeholder="you@email.com" required>
+                        <input type="email" name="Email" placeholder="you@email.com" required>
                     </div>
 
                     <div class="form-group">
                         <label>Project Type</label>
                         <div class="select-wrapper">
-                            <select required>
+                            <select name="Project Type" required>
                                 <option value="" disabled selected hidden>Select a service...</option>
                                 <option value="short-form">Short-Form Content (TikTok, Reels)</option>
                                 <option value="long-form">Long-Form Content (YouTube)</option>
@@ -333,7 +335,7 @@
 
                     <div class="form-group">
                         <label>Tell me about your project</label>
-                        <textarea placeholder="Describe what you need, timeline, budget, or anything that helps..." required></textarea>
+                        <textarea name="Message" placeholder="Describe what you need, timeline, budget, or anything that helps..." required></textarea>
                     </div>
 
                     <button type="submit" class="submit-btn">
