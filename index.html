@@ -93,7 +93,8 @@
 
     <section id="about" class="about-section">
         <div class="about-grid">
-            <div class="about-image glass">
+            <!-- Removed the 'glass' class here so the container doesn't clash with the blended image -->
+            <div class="about-image">
                 <img src="https://wanderbites.alwaysdata.net/chalsu.jpeg" alt="Charles Adrian G. Vitto">
             </div>
             <div class="about-content">
@@ -197,7 +198,7 @@
             <button class="filter-btn" data-filter="Health">Health & Wellness</button>
             <button class="filter-btn" data-filter="Products">Products & Tech</button>
             <button class="filter-btn" data-filter="Lifestyle">Lifestyle & Venues</button>
-            </div>
+        </div>
 
         <div class="carousel-container">
             <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
