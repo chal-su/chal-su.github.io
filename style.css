@@ -37,6 +37,7 @@ body {
     height: 500px;
     background: rgba(20, 184, 166, 0.3);
 }
+/* New Extended Glows for more vibrant background */
 .glow-violet-mid {
     top: 35%;
     left: -10%;
@@ -416,12 +417,9 @@ body {
 .about-image {
     width: 100%;
     aspect-ratio: 4/5; /* Gives the photo a nice vertical portrait frame */
-    border-radius: 24px;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.02);
 }
 
 .about-image img {
@@ -429,6 +427,9 @@ body {
     height: 100%;
     object-fit: cover;
     opacity: 0.9;
+    /* Fades the edges seamlessly into the background */
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse at 50% 50%, black 50%, transparent 100%);
 }
 
 .section-title {
