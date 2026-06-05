@@ -197,8 +197,7 @@
             <button class="filter-btn" data-filter="Health">Health & Wellness</button>
             <button class="filter-btn" data-filter="Products">Products & Tech</button>
             <button class="filter-btn" data-filter="Lifestyle">Lifestyle & Venues</button>
-            <button class="filter-btn" data-filter="Pets">Pets</button>
-        </div>
+            </div>
 
         <div class="carousel-container">
             <button class="carousel-arrow arrow-left" onclick="moveCarousel(this, -1)">
@@ -381,10 +380,10 @@
         const allPortfolioData = [
             { filter: "Health", category: "Elderly Care", title: "Elderly Medicine 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495491/elder_jyhezm.mp4" },
             { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495489/Gk_p8wqte.mp4" },
-            { filter: "Pets", category: "Pet Products", title: "Silversticks for Cats 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495488/showreel_rpxak4.mp4" },
+            { filter: "Lifestyle", category: "Pet Products", title: "Silversticks for Cats 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495488/showreel_rpxak4.mp4" },
             { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 2", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495487/Gk2_afelup.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Gut Health 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495485/guts1_ctdsry.mp4" },
-            { filter: "Pets", category: "Pet Health", title: "Gut Supplement for Dogs 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/dog_sziwni.mp4" },
+            { filter: "Lifestyle", category: "Pet Health", title: "Gut Supplement for Dogs 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/dog_sziwni.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/bp9_buzatz.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women 2", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495482/Bp6_dci5lt.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women 3", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495481/bp_s7b0gm.mp4" },
@@ -434,7 +433,7 @@
             { filter: "Products", category: "Apparel", title: "Calming Vest for Kids 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493373/vest1_uedrtb.mp4" },
             { filter: "Products", category: "Apparel", title: "Calming Vest for Kids 2", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest3_cycsdu.mp4" },
             { filter: "Products", category: "Apparel", title: "Calming Vest for Kids 3", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest4_aavbsq.mp4" },
-            { filter: "Products", category: "Apparel", title: "Calming Vest for Kids 4", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest_vkdzsb.mp4" }
+            { filter: "Lifestyle", category: "Apparel", title: "Calming Vest for Kids 4", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780493372/vest_vkdzsb.mp4" }
         ];
 
         // 2. DYNAMIC RENDERING LOGIC
@@ -464,7 +463,7 @@
             const row1Data = filteredData.slice(0, halfLength);
             const row2Data = filteredData.slice(halfLength);
 
-            function populate(trackId, dotsId, items) {
+            function populate(trackId, dotsId, items, isLeft) {
                 const track = document.getElementById(trackId);
                 const dotsContainer = document.getElementById(dotsId);
 
@@ -490,7 +489,10 @@
 
                 track.style.animation = 'none';
                 track.offsetHeight; 
-                track.style.animation = null; 
+                track.style.animation = ''; 
+
+                const baseSpeed = isLeft ? (25 / 28) : (30 / 28);
+                track.style.animationDuration = (items.length * baseSpeed) + 's';
 
                 setTimeout(() => {
                     const anims = track.getAnimations();
@@ -513,8 +515,8 @@
                 }, 50);
             }
 
-            populate('track-1', 'dots-1', row1Data);
-            populate('track-2', 'dots-2', row2Data);
+            populate('track-1', 'dots-1', row1Data, true);
+            populate('track-2', 'dots-2', row2Data, false);
             
             document.querySelectorAll('.carousel-container').forEach(container => {
                 const track = container.querySelector('.carousel-track');
