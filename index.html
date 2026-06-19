@@ -360,7 +360,7 @@
     <div id="videoModal" class="modal">
         <div class="modal-content glass">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <video id="modalVideo" controls autoplay playsinline></video>
+            <video id="modalVideo" controls controlsList="nodownload" autoplay playsinline></video>
         </div>
     </div>
 
@@ -383,7 +383,6 @@
             { filter: "Lifestyle", category: "Pet Products", title: "Silversticks for Cats 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495488/showreel_rpxak4.mp4" },
             { filter: "Products", category: "Home & Garden", title: "Garden Kneeler 2", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495487/Gk2_afelup.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Gut Health 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495485/guts1_ctdsry.mp4" },
-            { filter: "Health", category: "Health & Wellness", title: "Purple Mouthwash", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1781813552/Purple_Mouthwash_NO_WM_k6dxut.mp4" },
             { filter: "Lifestyle", category: "Pet Health", title: "Gut Supplement for Dogs 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/dog_sziwni.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women 1", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495484/bp9_buzatz.mp4" },
             { filter: "Health", category: "Health & Wellness", title: "Remedy for Black Women 2", src: "https://res.cloudinary.com/dvqkhkbsj/video/upload/q_auto/f_auto/v1780495482/Bp6_dci5lt.mp4" },
@@ -644,7 +643,7 @@
             if (event.target == successModal) closeSuccessModal();
         }
 
-        // 7. NEW: DISABLE RIGHT-CLICK (CONTEXT MENU)
+        // 7. DISABLE RIGHT-CLICK (CONTEXT MENU)
         document.addEventListener('contextmenu', event => event.preventDefault());
         
         // 8. DISABLE KEYBOARD SHORTCUTS FOR DEV TOOLS
